@@ -5,6 +5,7 @@
     public record CreateProductResponse(Guid Id);
     public class CreateProductEndpoint : ICarterModule
     {
+        //create product
         public void AddRoutes(IEndpointRouteBuilder app)
         {
             app.MapPost
