@@ -23,7 +23,7 @@
         {
             logger.LogInformation($"UpdateProductCommandHandler.Handle called with {command}");
 
-            var product = await sesstion.LoadAsync<Product>(command.Id, cancellationToken) ?? throw new ProductNotFoundException();
+            var product = await sesstion.LoadAsync<Product>(command.Id, cancellationToken) ?? throw new ProductNotFoundException(command.Id);
             product.Name = command.Name;
             product.Category = command.Category;
             product.Description = command.Description;  
