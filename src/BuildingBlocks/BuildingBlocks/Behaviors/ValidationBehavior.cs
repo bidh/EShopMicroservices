@@ -8,7 +8,9 @@ namespace BuildingBlocks.Behaviors
         (IEnumerable<IValidator<TRequest>> validators)
         : IPipelineBehavior<TRequest, TResponse>
         where TRequest : ICommand<TResponse>
+        //validation is handled only in the command side but not in the query side
     {
+        // this is the generic validation behavior class that will be used to validate the request
         public async Task<TResponse> Handle(TRequest request, 
             RequestHandlerDelegate<TResponse> next, 
             CancellationToken cancellationToken)
