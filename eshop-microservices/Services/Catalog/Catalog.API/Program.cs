@@ -4,9 +4,12 @@ var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(Program).Assembly;
 
 //adding MediatR and inside it the pipeline is define with the ValidationBehavior
+//and then LoggingBehavior
+//every request will go through these pipelines behaviors
 builder.Services.AddMediatR(config=> { 
     config.RegisterServicesFromAssemblies(assembly);
     config.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
 builder.Services.AddValidatorsFromAssembly(assembly);
 

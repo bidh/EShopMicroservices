@@ -16,13 +16,11 @@
         }
     }
     public class UpdateProductCommandHandler 
-        (IDocumentSession sesstion, ILogger<UpdateProductCommandHandler> logger)
+        (IDocumentSession sesstion)
         : ICommandHandler<UpdateProductCommand, UpdateProductResult>
     {
         public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
         {
-            logger.LogInformation($"UpdateProductCommandHandler.Handle called with {command}");
-
             var product = await sesstion.LoadAsync<Product>(command.Id, cancellationToken) ?? throw new ProductNotFoundException(command.Id);
             product.Name = command.Name;
             product.Category = command.Category;

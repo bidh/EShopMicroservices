@@ -26,12 +26,11 @@ namespace Catalog.API.Products.CreateProduct
     //CreateProductCommand is the request that is being handled
     //CreateProductResult is the result of the request
     internal class CreateProductCommandHandler
-        (IDocumentSession session, ILogger<CreateProductCommandHandler> logger) 
+        (IDocumentSession session) 
         : ICommandHandler<CreateProductCommand,CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
-        { 
-            logger.LogInformation($"CreateProductCommandHandler.Handle called with {command}");
+        {             
             var product = new Product
             {
                 Id = Guid.NewGuid(),
