@@ -8,7 +8,7 @@
         {
             app.MapDelete("/basket/{userName}", async (string userName, ISender sender) =>
             {
-                var result = sender.Send(new DeleteBasketCommand(userName));
+                var result = await sender.Send(new DeleteBasketCommand(userName));
                 var response = result.Adapt<DeleteBasketResponse>();
                 return Results.Ok(response);
             })
