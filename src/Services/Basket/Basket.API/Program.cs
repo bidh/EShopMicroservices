@@ -1,5 +1,4 @@
 using BuildingBlocks.Exceptions.Handler;
-using Microsoft.Extensions.Caching.Distributed;
 
 var builder = WebApplication.CreateBuilder(args);
 
