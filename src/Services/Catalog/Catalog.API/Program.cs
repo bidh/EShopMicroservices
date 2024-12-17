@@ -27,8 +27,13 @@ if (builder.Environment.IsDevelopment())
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
+// Health checks are necessary to check the health of the service
+// and its dependencies. It is a good practice to add health checks
+// For this service, we are adding health checks for Postgres
+// In nuget package we need to install the following packages
+// AspNetCore.HealthChecks.NpgSql
 builder.Services.AddHealthChecks()
-    .AddNpgSql(builder.Configuration.GetConnectionString("Database"));
+    .AddNpgSql(builder.Configuration.GetConnectionString("Database")!);
 
 var app = builder.Build();
 
@@ -42,7 +47,5 @@ app.UseHealthChecks("/health",
     {
         ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
     }); 
-
-app.MapGet("/", () => "Welcome to E-shop Microservices Back end service!");
 
 app.Run();

@@ -1,4 +1,5 @@
 using BuildingBlocks.Exceptions.Handler;
+using HealthChecks.UI.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,10 +40,27 @@ builder.Services.AddStackExchangeRedisCache(options =>
     //options.InstanceName = "Basket_";
 });
 
+// Health checks are necessary to check the health of the service
+// and its dependencies. It is a good practice to add health checks
+// For this service, we are adding health checks for Postgres and Redis
+// In nuget package we need to install the following packages
+// AspNetCore.HealthChecks.NpgSql
+// AspNetCore.HealthChecks.Redis
+builder.Services.AddHealthChecks()
+                .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
+                .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
 app.MapCarter();
 app.UseExceptionHandler(options => { });
+
+app.UseHealthChecks("/health",
+    new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+    {
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
+
 app.Run();
