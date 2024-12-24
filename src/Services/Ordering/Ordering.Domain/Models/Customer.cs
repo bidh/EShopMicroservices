@@ -10,12 +10,14 @@
             ArgumentException.ThrowIfNullOrWhiteSpace(name, nameof(name));
             ArgumentException.ThrowIfNullOrWhiteSpace(email, nameof(email));
 
-            return new Customer
+            var customer = new Customer
             {
                 Id = id,
                 Name = name,
                 Email = email
             };
+
+            return customer;
         }
     }
 }
