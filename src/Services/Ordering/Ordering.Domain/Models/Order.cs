@@ -11,7 +11,7 @@
         public Address ShippingAddress { get; private set; } = default!;
         public Address BillingAddress { get; private set; } = default!;
         public Payment Payment { get; private set; } = default!;
-        public OrderStatus OrderStatus { get; private set; } = OrderStatus.Pending;
+        public OrderStatus Status { get; private set; } = OrderStatus.Pending;
         public decimal TotalPrice
         {
             get => _orderItems.Sum(item => item.Price * item.Quantity);
