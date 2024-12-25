@@ -52,8 +52,7 @@
             ShippingAddress = shippingAddress;
             BillingAddress = billingAddress;
             Payment = payment;
-            OrderStatus = status;
-
+            Status = status;
             AddDomainEvent(new OrderUpdatedEvent(this));
         }
 
