@@ -1,6 +1,7 @@
 ﻿namespace Ordering.Domain.Models
 {
     // it is rich domain model which also contains the business logic
+    // it is inherited from Aggregate base class which supports domain events
     public class Order : Aggregate<OrderId>
     {
         private readonly List<OrderItem> _orderItems = [];
