@@ -4,7 +4,7 @@
     {
     }
 
-    //IAggregate interface is special kind of entity that can handle a domain
+    //IAggregate interface is special kind of entity that can handle a domain event
     public interface IAggregate : IEntity
     {
         IReadOnlyList<IDomainEvent> DomainEvents { get; }
