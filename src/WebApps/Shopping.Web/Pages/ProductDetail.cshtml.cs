@@ -6,6 +6,7 @@ namespace Shopping.Web.Pages
     {
         public ProductModel Product { get; set; } = default!;
 
+        //bind property can be used to set the value of the property from the page
         [BindProperty]
         public string Color { get; set; } = default!;
 
